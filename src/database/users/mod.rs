@@ -67,16 +67,6 @@ pub fn authenticate_user(
             cause: "Username doesn't exist".to_owned(),
         })?;
 
-    // Return error if login count is above 4
-    if let Some(count) = app_state.login_count.get(&user.id) {
-        if *count <= 4 {
-            return Err(DbError {
-                err_type: DbErrorType::Unauthorized,
-                cause: "Too many active sessions".to_owned(),
-            });
-        }
-    };
-
     // Check password
     if !crate::hash::compare_passwords(&data.password.as_bytes(), &user.password_hash)
         .map_err(|err| DbError {

@@ -71,8 +71,7 @@ impl AppConfig {
         // configuration merge order:
         // 1. Set defaults
         // 2. default.toml
-        // 3. local.toml
-        // 4. From environment var(prefix = TRIOX")
+        // 3. From environment var(prefix = TRIOX")
         use std::env;
         use std::path::PathBuf;
 
@@ -91,12 +90,6 @@ impl AppConfig {
         config
             .merge(File::with_name(default_path))
             .expect(&format!("couldn't read config from: {:?}", default));
-
-        let local: PathBuf = [dir, "local"].iter().collect();
-        let local_path = local.to_str().unwrap_or("config/local");
-        config
-            .merge(File::with_name(local_path))
-            .expect(&format!("couldn't read config from: {:?}", local_path));
 
         config
             .merge(Environment::with_prefix("TRIOX").separator("_"))

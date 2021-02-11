@@ -1,5 +1,3 @@
-use dashmap::DashMap;
-
 use crate::config::AppConfig;
 use crate::database;
 
@@ -9,7 +7,6 @@ use crate::database;
 pub struct AppState {
     pub db_pool: database::DbPool,
     pub config: AppConfig,
-    pub login_count: DashMap<u32, u8>,
 }
 
 impl AppState {
@@ -21,10 +18,6 @@ impl AppState {
         let db_pool = database::connect(&config.database.url())
             .expect("Failed to create database pool.");
 
-        AppState {
-            config,
-            login_count: DashMap::new(),
-            db_pool,
-        }
+        AppState { config, db_pool }
     }
 }
