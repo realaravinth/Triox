@@ -35,7 +35,7 @@ actix-multipart = "0.3"
 actix-governor = "0.2"
 actix-web = { version = "3", features = ["openssl"] }
 actix-identity = "0.3"
-actix-service = "1.0.6"
+actix-service = "2.0.0"
 openssl = { version = "0.10.29", features = ["vendored"] }
 
 sqlx = { version = "0.4.0", features = [ "runtime-actix-rustls", "postgres", "time", "offline" ] }
